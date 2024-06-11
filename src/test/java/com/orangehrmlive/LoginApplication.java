@@ -11,8 +11,10 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class LoginApplication extends BaseClass{
+public class LoginApplication extends BaseClass {
     WebElement userEle;
+    WebElement passwordEle = driver.findElement(By.name("password"));
+    WebElement clickBtnEle = driver.findElement(By.xpath("//button[@type='submit']"));
        /*
         1. Open a browser >= done
         2. Open URL - done
@@ -49,24 +51,25 @@ public class LoginApplication extends BaseClass{
         }
 
         //To clear password input field
-        driver.findElement(By.name("password")).clear();
+        passwordEle.clear();
 
         //Inout Password
-        inputValueInInputField((By) driver.findElement(By.name("password")), password);
+        inputValueInInputField((By) passwordEle, password);
 
         //Clickq`w1 on Login button
-        clickBtn((By) driver.findElement(By.xpath("//button[@type='submit']")));
+        clickBtn((By) clickBtnEle);
     }
 
     @Test(priority = 1)
     public void validateHomePageTitle() {
+
         userEle = driver.findElement(By.name("username"));
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.name("password")));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.name("username")));
 
         // To validate input field
-        driver.findElement(By.name("password")).isDisplayed();
+        driver.findElement(By.name("username")).isDisplayed();
 
         if (userEle.isDisplayed()) {
             userEle.clear();
@@ -74,19 +77,19 @@ public class LoginApplication extends BaseClass{
             userEle.clear();
 
             //Inout UserName
-            userEle.sendKeys(userName);
+            inputValueInInputField((By) userEle, userName);
         } else {
             System.out.println("User Name input field not found");
         }
 
         //To clear password input field
-        driver.findElement(By.name("password")).clear();
+        passwordEle.clear();
 
         //Inout Password
-        driver.findElement(By.name("password")).sendKeys(password);
+        inputValueInInputField((By) passwordEle, password);
 
-        //Click on Login button
-        clickBtn((By) driver.findElement(By.xpath("//button[@type='submit']")));
+        //Clickq`w1 on Login button
+        clickBtn((By) clickBtnEle);
 
         String expectedPageTitle = "OrangeHRM";
 
