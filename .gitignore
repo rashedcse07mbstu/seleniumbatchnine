@@ -1,0 +1,6 @@
+#To ignore unnecessary information
+/.gradle/
+/.idea/
+/build/
+out/
+
